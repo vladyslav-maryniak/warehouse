@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using Warehouse.Application.Services;
+using Warehouse.Application.Services.Abstractions;
 using Warehouse.Infrastructure;
 
 namespace Warehouse.API
@@ -13,6 +15,8 @@ namespace Warehouse.API
             builder.Services.AddDbContext<WarehouseContext>(options =>
                 options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultDatabase"])
             );
+
+            builder.Services.AddTransient<IContractService, ContractService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

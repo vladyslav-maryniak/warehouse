@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.API", "Warehouse.API\Warehouse.API.csproj", "{698B0EC0-015A-44C0-82A2-1D45FE9552FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Application", "Warehouse.Application\Warehouse.Application.csproj", "{0FAE1B1F-A2E0-4C76-82D2-9549709C4F11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{698B0EC0-015A-44C0-82A2-1D45FE9552FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{698B0EC0-015A-44C0-82A2-1D45FE9552FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{698B0EC0-015A-44C0-82A2-1D45FE9552FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FAE1B1F-A2E0-4C76-82D2-9549709C4F11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FAE1B1F-A2E0-4C76-82D2-9549709C4F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FAE1B1F-A2E0-4C76-82D2-9549709C4F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FAE1B1F-A2E0-4C76-82D2-9549709C4F11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
