@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Warehouse.Application.Services;
 using Warehouse.Application.Services.Abstractions;
 using Warehouse.Infrastructure.Entities;
 
@@ -10,7 +11,7 @@ namespace Warehouse.API.Controllers
     {
         private readonly IRequestService requestService;
 
-        public ContractsController(IRequestService requestService)
+        public RequestsController(IRequestService requestService)
         {
             this.requestService = requestService;
         }

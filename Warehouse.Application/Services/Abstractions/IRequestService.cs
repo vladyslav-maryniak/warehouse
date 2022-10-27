@@ -1,4 +1,6 @@
-﻿namespace Warehouse.Application.Services
+﻿using Warehouse.Infrastructure.Entities;
+
+namespace Warehouse.Application.Services
 {
     public interface IRequestService
     {

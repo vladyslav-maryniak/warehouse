@@ -15,12 +15,12 @@ namespace Warehouse.Application.Services
             this.context = context;
         }
 
-        public Task<Contract[]> GetAllAsync()
+        public Task<Employee[]> GetAllAsync()
           => context.Employees
               .AsNoTracking()
               .ToArrayAsync();
 
-        public Task<Contract?> GetAsync(int id)
+        public Task<Employee?> GetAsync(int id)
             => context.Employees
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);

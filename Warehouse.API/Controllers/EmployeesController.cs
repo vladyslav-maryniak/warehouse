@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Warehouse.Application.Services;
 using Warehouse.Application.Services.Abstractions;
 using Warehouse.Infrastructure.Entities;
 
@@ -10,11 +11,12 @@ namespace Warehouse.API.Controllers
     {
         private readonly IEmployeeService employeeService;
 
-        public ContractsController(IEmployeeService employeeService)
+        public EmployeesController(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
         }
 
+        [HttpGet]
         public async Task<ActionResult<Employee[]>> GetAllAsync()
         {
             var result = await employeeService.GetAllAsync();
