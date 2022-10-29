@@ -5,9 +5,9 @@ namespace Warehouse.Application.Services
     public interface IRequestService
     {
         Task<Request> AddAsync(Request request);
-        Task DeleteAsync(global::System.Int32 id);
+        Task DeleteAsync(int id);
         Task<Request[]> GetAllAsync();
-        Task<Request> GetAsync(global::System.Int32 id);
+        Task<Request> GetAsync(int id);
         Task UpdateAsync(Request request);
     }
 }

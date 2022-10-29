@@ -5,8 +5,8 @@ namespace Warehouse.Application.Services
     public interface IEmployeeService
     {
         Task<Employee> AddAsync(Employee employee);
-        Task DeleteAsync(global::System.Int32 id);
+        Task DeleteAsync(int id);
         Task<Employee[]> GetAllAsync();
-        Task<Employee> GetAsync(global::System.Int32 id);
+        Task<Employee> GetAsync(int id);
     }
 }
