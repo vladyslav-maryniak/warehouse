@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using Warehouse.DesktopApplication.Services;
 using Warehouse.Infrastructure.Entities;
 
@@ -10,45 +6,32 @@ namespace Warehouse.DesktopApplication;
 
 public partial class MainWindow : Window
 {
-    private readonly IEmployeeService employeeService;
+    private readonly IContractService contractService;
 
-    public MainWindow(IEmployeeService employeeService)
+    public MainWindow(IContractService contractService)
     {
         InitializeComponent();
-        this.employeeService = employeeService;
-        getAllEmployees();
+        this.contractService = contractService;
     }
 
-    private async void getAllEmployees()
+    private async void getContracts_Click(object sender, RoutedEventArgs e)
     {
-        var employees = await employeeService.GetAllAsync();
-        List<Employee> lst = new List<Employee>(employees);
-        employeeGrid.ItemsSource = lst;
-    }
+        // GetAll
+        var contracts = await contractService.GetAllAsync();
 
-    private async void getAllEmployees_Click(object sender, RoutedEventArgs e)
-    {
-        getAllEmployees();
-    }
+        // Post
+        var contract = new Contract { Credential = "asdf" };
+        contract = await contractService.AddAsync(contract);
 
-    private async void addEmployees_Click(object sender, RoutedEventArgs e)
-    {
-        var employee = new Employee { };
-        employee = await employeeService.AddAsync(employee);
-        getAllEmployees();
-    }
+        // Put
+        contract.Credential += "FromPut";
+        await contractService.UpdateAsync(contract);
 
-    private async void deleteEmployees_Click(object sender, RoutedEventArgs e)
-    {
-        if(employeeGrid.SelectedIndex != -1)
-        {
-            Employee employee = (Employee)employeeGrid.SelectedItem;
-            await employeeService.DeleteAsync(employee.Id);
-            getAllEmployees();
-        }
-        else
-        {
-            MessageBox.Show("ERROR. Select employee to delete.");
-        }
+        // Get
+        contract = await contractService.GetAsync(contract.Id);
+        containers.Text = $"[{contracts.Length} + {contract!.Id}] => {contract.Credential}";
+
+        // Delete
+        await contractService.DeleteAsync(contract.Id);
     }
 }

@@ -18,7 +18,10 @@ namespace Warehouse.DesktopApplication
         public static void Configure(HostBuilderContext context, IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<EmployeeWindow>();
 
+            services.AddRefitClient<IContractService>()
+                .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
             services.AddRefitClient<IEmployeeService>()
                 .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
         }
@@ -27,7 +30,7 @@ namespace Warehouse.DesktopApplication
         {
             await appHost.StartAsync();
 
-            var startupForm = appHost.Services.GetRequiredService<MainWindow>();
+            var startupForm = appHost.Services.GetRequiredService<EmployeeWindow>();
             startupForm.Show();
 
             base.OnStartup(e);
