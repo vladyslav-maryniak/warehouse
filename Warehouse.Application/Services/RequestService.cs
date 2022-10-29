@@ -5,7 +5,7 @@ using Warehouse.Infrastructure.Entities;
 
 namespace Warehouse.Application.Services
 {
-    class RequestService : IRequestService
+    public class RequestService : IRequestService
     {
         private readonly WarehouseContext context;
 
