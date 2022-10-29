@@ -17,6 +17,8 @@ namespace Warehouse.API
             );
 
             builder.Services.AddTransient<IContractService, ContractService>();
+            builder.Services.AddTransient<IEmployeeService, EmployeeService>();
+            builder.Services.AddTransient<IRequestService, RequestService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
