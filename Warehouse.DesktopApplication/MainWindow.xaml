@@ -7,9 +7,35 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="containers"></TextBlock>
-            <Button x:Name="getContracts" Padding="10 5" Click="getContracts_Click">Contracts</Button>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Employee" Padding="5" Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+            <StackPanel>
+                <Button Height="25" Margin="5" Click="getAllEmployees_Click">Update list</Button>
+                <Button Height="25" Margin="5" Click="addEmployees_Click">Add new employee</Button>
+                <Button Height="25" Margin="5" Click="deleteEmployees_Click">Delete employee</Button>
+            </StackPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="employeeGrid" Margin="5" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" 
+                  AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Employee id" Binding="{Binding Id}" Width="90" />
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>
+
