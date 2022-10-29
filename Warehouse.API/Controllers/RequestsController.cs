@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Warehouse.Application.Services;
-using Warehouse.Application.Services.Abstractions;
 using Warehouse.Infrastructure.Entities;
 
 namespace Warehouse.API.Controllers

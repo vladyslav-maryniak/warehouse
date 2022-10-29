@@ -1,28 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Warehouse.DesktopApplication.Services;
+using Warehouse.Infrastructure.Entities;
 
-namespace Warehouse.DesktopApplication
+namespace Warehouse.DesktopApplication;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    private readonly IContractService contractService;
+
+    public MainWindow(IContractService contractService)
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        this.contractService = contractService;
+    }
+
+    private async void getContracts_Click(object sender, RoutedEventArgs e)
+    {
+        // GetAll
+        var contracts = await contractService.GetAllAsync();
+
+        // Post
+        var contract = new Contract { Credential = "asdf" };
+        contract = await contractService.AddAsync(contract);
+
+        // Put
+        contract.Credential += "FromPut";
+        await contractService.UpdateAsync(contract);
+
+        // Get
+        contract = await contractService.GetAsync(contract.Id);
+        containers.Text = $"[{contracts.Length} + {contract!.Id}] => {contract.Credential}";
+
+        // Delete
+        await contractService.DeleteAsync(contract.Id);
     }
 }

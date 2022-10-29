@@ -1,17 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Refit;
+using System;
 using System.Windows;
+using Warehouse.DesktopApplication.Services;
 
 namespace Warehouse.DesktopApplication
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        private static readonly Uri warehouseApiUri = new("https://localhost:7238");
+        private static readonly IHost appHost =
+            Host.CreateDefaultBuilder()
+                .ConfigureServices(Configure)
+                .Build();
+
+        public static void Configure(HostBuilderContext context, IServiceCollection services)
+        {
+            services.AddSingleton<MainWindow>();
+
+            services.AddRefitClient<IContractService>()
+                .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
+        }
+
+        protected override async void OnStartup(StartupEventArgs e)
+        {
+            await appHost.StartAsync();
+
+            var startupForm = appHost.Services.GetRequiredService<MainWindow>();
+            startupForm.Show();
+
+            base.OnStartup(e);
+        }
+
+        protected override async void OnExit(ExitEventArgs e)
+        {
+            await appHost.StopAsync();
+
+            base.OnExit(e);
+        }
     }
 }

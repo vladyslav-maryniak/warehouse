@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock x:Name="containers"></TextBlock>
+            <Button x:Name="getContracts" Padding="10 5" Click="getContracts_Click">Contracts</Button>
+        </StackPanel>
     </Grid>
 </Window>
