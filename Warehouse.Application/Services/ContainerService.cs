@@ -5,7 +5,7 @@ using Warehouse.Infrastructure.Entities;
 
 namespace Warehouse.Application.Services
 {
-    internal class ContainerService : IContainerService
+    public class ContainerService : IContainerService
     {
         private readonly WarehouseContext context;
 
