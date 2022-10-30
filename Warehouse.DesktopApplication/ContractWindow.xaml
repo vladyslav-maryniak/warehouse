@@ -1,0 +1,54 @@
+﻿<Window x:Class="Warehouse.DesktopApplication.ContractWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse.DesktopApplication"
+        mc:Ignorable="d"
+        Title="ContractWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Header="Contracts" Padding="3" Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+            <StackPanel>
+                <Button Height="25" Margin="3" Click="getAllContracts_Click">Update list</Button>
+                <TextBlock HorizontalAlignment="Center" Margin="5">Enter contract id</TextBlock>
+                <TextBox x:Name="contractIdTextBox"></TextBox>
+                <Button Height="25" Margin="3" Click="findContracts_Click">Find contract</Button>
+                <TextBlock HorizontalAlignment="Center" Margin="5">Enter new expyry date</TextBlock>
+                <TextBox x:Name="expyryTimeTexBox">23.10.2222 15:16:21</TextBox>
+                <Button Height="25" Margin="5" Click="updateContracts_Click">Update</Button>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Add contract" Padding="5" Margin="5" Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+            <StackPanel>
+                <Button Height="25" Margin="5" Click="addNewContracts_Click">Add new contract</Button>
+                <Button Height="25" Margin="5" Click="addNewContracts_Click">Update Contract</Button>
+            </StackPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="contractGrid" Margin="5" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" 
+                  AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" MouseDoubleClick="Row_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Contract id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Credential" Binding="{Binding Credential}"/>
+                <DataGridTextColumn Header="Start date" Binding="{Binding StartDate}"/>
+                <DataGridTextColumn Header="Expyry date" Binding="{Binding ExpiryDate}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>

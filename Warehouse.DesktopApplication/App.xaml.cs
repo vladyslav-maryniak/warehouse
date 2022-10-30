@@ -18,6 +18,7 @@ namespace Warehouse.DesktopApplication
         public static void Configure(HostBuilderContext context, IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<ContractWindow>();
 
             services.AddRefitClient<IContractService>()
                 .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
