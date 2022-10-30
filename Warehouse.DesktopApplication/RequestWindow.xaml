@@ -1,0 +1,51 @@
+﻿<Window x:Class="Warehouse.DesktopApplication.RequestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Warehouse.DesktopApplication"
+        mc:Ignorable="d"
+        Title="RequestWindow" Height="450" Width="550">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Padding="3" Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+            <StackPanel>
+                <Button Height="25" Margin="5 20 5 5" Click="getAllRequests_Click" FontWeight="Bold">Update list</Button>
+                <TextBlock HorizontalAlignment="Center" Margin="5 20 5 5">Enter request id</TextBlock>
+                <TextBox x:Name="requestIdTextBox" PreviewTextInput="PreviewTextInputNumbers"></TextBox>
+                <Button Height="25" Margin="3" Click="findRequest_Click" FontWeight="Bold">Find contract</Button>
+                <TextBlock HorizontalAlignment="Center" Margin="5 50 5 5">Enter new expyry date</TextBlock>
+                <TextBox x:Name="expyryTimeTexBox">01.01.2222 01:01:01</TextBox>
+                <TextBlock HorizontalAlignment="Center" Margin="5">Enter Employee id</TextBlock>
+                <TextBox x:Name="employeeIdTexBox" PreviewTextInput="PreviewTextInputNumbers">0</TextBox>
+                <TextBlock HorizontalAlignment="Center" Margin="5">Enter contract id</TextBlock>
+                <TextBox x:Name="contractIdTexBox" PreviewTextInput="PreviewTextInputNumbers">0</TextBox>
+                <Button Height="25" Margin="5" Click="updateRequest_Click" FontWeight="Bold">Update</Button>
+                <Button Height="25" Margin="5" Click="addRequest_Click" FontWeight="Bold">Add request</Button>
+            </StackPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="requestGrid" Margin="5" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" 
+                  AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" MouseDoubleClick="Row_MouseDoubleClick">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Request id" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Target Date" Binding="{Binding TargetDate}"/>
+                <DataGridTextColumn Header="Employee id" Binding="{Binding EmployeeId}"/>
+                <DataGridTextColumn Header="Contrac id" Binding="{Binding ContractId}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Window>
