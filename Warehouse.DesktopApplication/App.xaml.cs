@@ -28,7 +28,7 @@ namespace Warehouse.DesktopApplication
         {
             await appHost.StartAsync();
 
-            var startupForm = appHost.Services.GetRequiredService<MainWindow>();
+            var startupForm = appHost.Services.GetRequiredService<ContractWindow>();
             startupForm.Show();
 
             base.OnStartup(e);

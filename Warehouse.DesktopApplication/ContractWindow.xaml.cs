@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -67,4 +68,11 @@ public partial class ContractWindow : Window
             expyryTimeTexBox.Text = contract.ExpiryDate.ToString();
         }
     }
+
+    private void PreviewTextInputNumbers(object sender, TextCompositionEventArgs e)
+    {
+        Regex regex = new Regex("[^0-9]+");
+        e.Handled = regex.IsMatch(e.Text);
+    }
+
 }
