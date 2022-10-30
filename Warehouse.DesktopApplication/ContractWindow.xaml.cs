@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ namespace Warehouse.DesktopApplication;
 public partial class ContractWindow : Window
 {
     private readonly IContractService contractService;
+    private static Random random = new Random();
 
     public ContractWindow(IContractService contractService)
     {
@@ -34,10 +36,15 @@ public partial class ContractWindow : Window
 
     private async void addNewContracts_Click(object sender, RoutedEventArgs e)
     {
-        var contract = new Contract { Credential = "TestCredential" };
-        contract = await contractService.AddAsync(contract);
+        //Need to add a selection of containers
+        var contract = new Contract { };
+        contract.StartDate = Convert.ToDateTime(startDateCreateTextBox.Text);
+        contract.ExpiryDate = Convert.ToDateTime(expiryDateCreateTextBox.Text);
+        contract.Credential = RandomString(10);
+        await contractService.AddAsync(contract);
         getAllContract();
     }
+
     private async void findContracts_Click(object sender, RoutedEventArgs e)
     {
         var contract = new Contract { };
@@ -46,6 +53,7 @@ public partial class ContractWindow : Window
         lst.Add(contract);
         contractGrid.ItemsSource = lst;
     }
+
     private async void updateContracts_Click(object sender, RoutedEventArgs e)
     {
         if (contractGrid.SelectedIndex != -1)
@@ -60,6 +68,7 @@ public partial class ContractWindow : Window
             MessageBox.Show("ERROR. Not correct data.");
         }
     }
+
     private void Row_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if (contractGrid.SelectedIndex != -1)
@@ -75,4 +84,10 @@ public partial class ContractWindow : Window
         e.Handled = regex.IsMatch(e.Text);
     }
 
+    public static string RandomString(int length)
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
 }
