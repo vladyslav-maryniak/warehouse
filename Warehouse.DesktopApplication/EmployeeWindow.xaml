@@ -5,25 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse.DesktopApplication"
         mc:Ignorable="d"
-        Title="EmployeeWindow" Height="450" Width="800">
+        Title="EmployeeWindow" Height="250" Width="500">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <GroupBox Header="Employee" Padding="5" Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+        <GroupBox Padding="5" Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
             <StackPanel>
-                <Button Height="25" Margin="5" Click="getAllEmployees_Click">Update list</Button>
-                <Button Height="25" Margin="5" Click="addEmployees_Click">Add new employee</Button>
-                <Button Height="25" Margin="5" Click="deleteEmployees_Click">Delete employee</Button>
+                <Button Height="25" Margin="5 30 5 5" Click="getAllEmployees_Click" FontWeight="Bold">Update list</Button>
+                <Button Height="25" Margin="5 30 5 5" Click="addEmployees_Click" FontWeight="Bold">Add new employee</Button>
+                <Button Height="25" Margin="5 30 5 5" Click="deleteEmployees_Click" FontWeight="Bold">Delete employee</Button>
             </StackPanel>
         </GroupBox>
 
