@@ -5,11 +5,92 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Warehouse.DesktopApplication"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="1000">
     <Grid>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock x:Name="containers"></TextBlock>
-            <Button x:Name="getContracts" Padding="10 5" Click="getContracts_Click">Contracts</Button>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox Padding="3" Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+            <StackPanel>
+                <Button Height="25" Margin="5" FontWeight="Bold" Click="getFreightContainers_Click">Show freights</Button>
+                <Button Height="25" Margin="5" FontWeight="Bold" Click="getIntermediateBulkContainers_Click">Show IntermediateBulk</Button>
+                <Button Height="25" Margin="5" FontWeight="Bold" Click="getRefrigeratedContainers_Click">Show refregigeratorst</Button>
+                
+                <TextBlock HorizontalAlignment="Center" Margin="5 20 5 5">Enter container id</TextBlock>
+                <TextBox x:Name="contractIdTextBox"></TextBox>
+                <Button Height="25" Margin="5"  FontWeight="Bold">Find contract</Button>
+                
+                
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Padding="3" Margin="5" Grid.Column="3" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+            <StackPanel>
+                <TextBlock HorizontalAlignment="Center" Margin="5 20 5 5">Name</TextBlock>
+                <TextBox x:Name="nameCreateIdTextBox"></TextBox>
+
+                <TextBlock HorizontalAlignment="Center" Margin="5">Height</TextBlock>
+                <TextBox x:Name="heightCreateTextBox"></TextBox>
+
+                <TextBlock HorizontalAlignment="Center" Margin="5">Width</TextBlock>
+                <TextBox x:Name="widthCreateTextBox"></TextBox>
+
+                <TextBlock HorizontalAlignment="Center" Margin="5">Length</TextBlock>
+                <TextBox x:Name="lengthCreateTextBox"></TextBox>
+
+                <TextBlock HorizontalAlignment="Center" Margin="5">Internal Volume</TextBlock>
+                <TextBox x:Name="internalVolumeCreateTextBox"></TextBox>
+
+                <RadioButton x:Name="FreightRadioButton" GroupName="ContainerType" Content="Freight" IsChecked="True" Margin="5 20 5 5" Checked="FreightRadioButton_Checked"/>
+                <RadioButton x:Name="IntermediateBulkRadioButton" GroupName="ContainerType" Content="IntermediateBulk" Margin="5 5 5 5" Checked="IntermediateBulkRadioButton_Checked"/>
+                <RadioButton x:Name="RefrigeratedRadioButton" GroupName="ContainerType" Content="Refrigerated" Margin="5 5 5 5" Checked="RefrigeratedRadioButton_Checked"/>
+            </StackPanel>
+        </GroupBox>
+
+
+
+        <GroupBox Padding="3" Margin="5" Grid.Column="4" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
+        <StackPanel>
+                <RadioButton x:Name="isHardTopRadioButton" GroupName="InterBulkContainerTop" Content="Hard top" IsChecked="True" Margin="5 20 5 5"/>
+                <RadioButton x:Name="isSoftTopRadioButton" GroupName="InterBulkContainerTop" Content="Soft top" Margin="5 5 5 5"/>
+                <RadioButton x:Name="isOpenTopRadioButton" GroupName="InterBulkContainerOpenSide" Content="Open top" Margin="5 20 5 5" IsChecked="True"/>
+                <RadioButton x:Name="isOpenSideRadioButton" GroupName="ContainerType" Content="Open side" Margin="5 5 5 5"/>
+
+                <TextBlock HorizontalAlignment="Center" Margin="5 20 5 5">Min temperature</TextBlock>
+                <TextBox x:Name="minTemperatureTextBox"></TextBox>
+
+                <TextBlock HorizontalAlignment="Center" Margin="5 5 5 5">Max temperature</TextBlock>
+                <TextBox x:Name="maxTemperatureTextBox"></TextBox>
+
+                <RadioButton x:Name="isFlexibleRadioButton" Content="Flexible" Margin="5 20 5 5"/>
+                <RadioButton x:Name="isRigidRadioButton" Content="Ridid" Margin="5 5 5 5"/>
+                <RadioButton x:Name="isVentilatedRadioButton" Content="Ventilated" Margin="5 5 5 5"/>
+
+                <Button Height="25" Margin="5" FontWeight="Bold" Click="addContainer_Click">Add</Button>
+                <Button Height="25" Margin="5" FontWeight="Bold">Delete</Button>
+            </StackPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="containerGrid" Margin="5" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2" 
+                  AutoGenerateColumns="False" HorizontalGridLinesBrush="DarkGray"
+    RowBackground="LightGray" AlternatingRowBackground="White" >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Contract id" Binding="{Binding Id}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        
+
     </Grid>
 </Window>

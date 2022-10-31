@@ -19,7 +19,7 @@ namespace Warehouse.DesktopApplication
         {
             services.AddSingleton<MainWindow>();
 
-            services.AddRefitClient<IContractService>()
+            services.AddRefitClient<IContainerService>()
                 .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
         }
 
