@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,26 +37,53 @@ public partial class MainWindow : Window
 
     private async void findContainer_Click(object sender, RoutedEventArgs e)
     {
+        if (!string.IsNullOrWhiteSpace(contractIdTextBox.Text))
+        {
+            var container = new Container { };
+            container = await containerService.GetAsync(Convert.ToInt32(contractIdTextBox.Text));
+            List<Container> lst = new List<Container>();
+            lst.Add(container);
+            containerGrid.ItemsSource = lst;
+        }
+    }
+
+    private async void deleteContainer_Click(object sender, RoutedEventArgs e)
+    {
 
     }
 
     private async void addContainer_Click(object sender, RoutedEventArgs e)
     {
+         if (ListComboBox.SelectedIndex == 0)
+         {
+
+         }
+
+        if (ListComboBox.SelectedIndex == 1)
+        {
+
+        }
+
+        if (ListComboBox.SelectedIndex == 2)
+        {
+
+        }
+
+        ExternalDimensions externalDimensions = new ExternalDimensions()
+        {
+            Length = Convert.ToDouble(lengthCreateTextBox.Text),
+            Width = Convert.ToDouble(lengthCreateTextBox.Text),
+            Height = Convert.ToDouble(lengthCreateTextBox.Text)
+        };
+
         RefrigeratedContainer refrigeratedContainer = new RefrigeratedContainer()
         {
-            ContractId = 1,
-            Name = "Test",
-            Price = 1000,
-            InternalVolume = 100,
-            MaxTemperature = 100, 
-            MinTemperature = 10,
-            ExternalDimensions = new ExternalDimensions()
-            {
-                Height = 10,
-                Width = 10,
-                Length = 10
-            }
+            Name = Convert.ToString(nameCreateIdTextBox.Text),
+            Price = Convert.ToDecimal(priceCreateTextBox.Text),
+            ExternalDimensions = externalDimensions,
+            InternalVolume = Convert.ToDecimal(internalVolumeCreateTextBox)
         };
+
         await containerService.AddAsync(refrigeratedContainer);
     }
 
@@ -85,24 +113,72 @@ public partial class MainWindow : Window
         //await contractService.DeleteAsync(contract.Id);
     }
 
-    private void FreightRadioButton_Checked(object sender, RoutedEventArgs e)
-    {
-        //isHardTopRadioButton.Visibility = Visibility.Visible;
-        //isSoftTopRadioButton.Visibility = Visibility.Visible;
-        //isOpenTopRadioButton.Visibility = Visibility.Visible;
-        //isOpenSideRadioButton.Visibility = Visibility.Visible;
-    }
 
-    private void IntermediateBulkRadioButton_Checked(object sender, RoutedEventArgs e)
+    private void ListComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        //isHardTopRadioButton.Visibility = Visibility.Hidden;
-        //isSoftTopRadioButton.Visibility = Visibility.Hidden;
-        //isOpenTopRadioButton.Visibility = Visibility.Hidden;
-        //isOpenSideRadioButton.Visibility = Visibility.Hidden;
-    }
+        if (ListComboBox.SelectedIndex == 0)
+        {
+            isHardTopRadioButton.Visibility = Visibility.Hidden;
+            isSoftTopRadioButton.Visibility = Visibility.Hidden;
+            isOpenSideRadioButton.Visibility = Visibility.Hidden;
+            isOpenTopRadioButton.Visibility = Visibility.Hidden;
 
-    private void RefrigeratedRadioButton_Checked(object sender, RoutedEventArgs e)
-    {
+            MinTemTextBlock.Visibility = Visibility.Hidden;
+            minTemperatureTextBox.Visibility = Visibility.Hidden;
+            maxTemTextBlock.Visibility = Visibility.Hidden;
+            maxTemperatureTextBox.Visibility = Visibility.Hidden;
 
+            isFlexibleRadioButton.Visibility = Visibility.Visible;
+            isRigidRadioButton.Visibility = Visibility.Visible;
+            isVentilatedRadioButton.Visibility = Visibility.Visible;
+        }
+        else if(ListComboBox.SelectedIndex == 1)
+        {
+            isHardTopRadioButton.Visibility = Visibility.Hidden;
+            isSoftTopRadioButton.Visibility = Visibility.Hidden;
+            isOpenSideRadioButton.Visibility = Visibility.Hidden;
+            isOpenTopRadioButton.Visibility = Visibility.Hidden;
+
+            MinTemTextBlock.Visibility = Visibility.Visible;
+            minTemperatureTextBox.Visibility = Visibility.Visible;
+            maxTemTextBlock.Visibility = Visibility.Visible;
+            maxTemperatureTextBox.Visibility = Visibility.Visible;
+
+            isFlexibleRadioButton.Visibility = Visibility.Hidden;
+            isRigidRadioButton.Visibility = Visibility.Hidden;
+            isVentilatedRadioButton.Visibility = Visibility.Hidden;
+        }
+         else if(ListComboBox.SelectedIndex == 2)
+        {
+            isHardTopRadioButton.Visibility = Visibility.Visible;
+            isSoftTopRadioButton.Visibility = Visibility.Visible;
+            isOpenSideRadioButton.Visibility = Visibility.Visible;
+            isOpenTopRadioButton.Visibility = Visibility.Visible;
+
+            MinTemTextBlock.Visibility = Visibility.Hidden;
+            minTemperatureTextBox.Visibility = Visibility.Hidden;
+            maxTemTextBlock.Visibility = Visibility.Hidden;
+            maxTemperatureTextBox.Visibility = Visibility.Hidden;
+
+            isFlexibleRadioButton.Visibility = Visibility.Hidden;
+            isRigidRadioButton.Visibility = Visibility.Hidden;
+            isVentilatedRadioButton.Visibility = Visibility.Hidden;
+        }
+        else
+        {
+            isHardTopRadioButton.Visibility = Visibility.Hidden;
+            isSoftTopRadioButton.Visibility = Visibility.Hidden;
+            isOpenSideRadioButton.Visibility = Visibility.Hidden;
+            isOpenTopRadioButton.Visibility = Visibility.Hidden;
+
+            MinTemTextBlock.Visibility = Visibility.Hidden;
+            minTemperatureTextBox.Visibility = Visibility.Hidden;
+            maxTemTextBlock.Visibility = Visibility.Hidden;
+            maxTemperatureTextBox.Visibility = Visibility.Hidden;
+
+            isFlexibleRadioButton.Visibility = Visibility.Hidden;
+            isRigidRadioButton.Visibility = Visibility.Hidden;
+            isVentilatedRadioButton.Visibility = Visibility.Hidden;
+        }
     }
 }
