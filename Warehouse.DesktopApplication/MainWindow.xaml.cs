@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,21 +19,11 @@ public partial class MainWindow : Window
         this.containerService = containerService;
     }
 
-    private async void getIntermediateBulkContainers_Click(object sender, RoutedEventArgs e)
+    private async void getContainers_Click(object sender, RoutedEventArgs e)
     {
         var container = await containerService.GetAllAsync();
         List<Container> lst = new List<Container>(container);
         containerGrid.ItemsSource = lst;
-    }
-
-    private async void getRefrigeratedContainers_Click(object sender, RoutedEventArgs e)
-    {
-
-    }
-
-    private async void getFreightContainers_Click(object sender, RoutedEventArgs e)
-    {
-
     }
 
     private async void findContainer_Click(object sender, RoutedEventArgs e)
@@ -52,65 +43,111 @@ public partial class MainWindow : Window
 
     }
 
-    private async void addContainer_Click(object sender, RoutedEventArgs e)
+    private async void test_Click(object sender, RoutedEventArgs e)
     {
-         if (ListComboBox.SelectedIndex == 0)
-         {
-
-         }
-
-        if (ListComboBox.SelectedIndex == 1)
-        {
-
-        }
-
-        if (ListComboBox.SelectedIndex == 2)
-        {
-
-        }
-
-        ExternalDimensions externalDimensions = new ExternalDimensions()
-        {
-            Length = Convert.ToDouble(lengthCreateTextBox.Text),
-            Width = Convert.ToDouble(lengthCreateTextBox.Text),
-            Height = Convert.ToDouble(lengthCreateTextBox.Text)
-        };
-
         RefrigeratedContainer refrigeratedContainer = new RefrigeratedContainer()
         {
-            Name = Convert.ToString(nameCreateIdTextBox.Text),
-            Price = Convert.ToDecimal(priceCreateTextBox.Text),
-            ExternalDimensions = externalDimensions,
-            InternalVolume = Convert.ToDecimal(internalVolumeCreateTextBox)
+            Name = "Ref",
+            ContractId = 1,
+            InternalVolume = 1000,
+            MaxTemperature = 10, MinTemperature = 10, Price = 100,
+            ExternalDimensions = new ExternalDimensions(){
+                Length = 10,
+                Width = 10,
+                Height = 10
+            }
         };
-
         await containerService.AddAsync(refrigeratedContainer);
+    }
+
+    private async void addContainer_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            var length = Convert.ToDouble(lengthCreateTextBox.Text);
+            var width = Convert.ToDouble(widthCreateTextBox.Text);
+            var height = Convert.ToDouble(heightCreateTextBox.Text);
+            var name = Convert.ToString(nameCreateIdTextBox.Text);
+            var price = Convert.ToDecimal(priceCreateTextBox.Text);
+            var internalVolume = Convert.ToDecimal(internalVolumeCreateTextBox.Text);
+
+            if (ListComboBox.SelectedIndex == 0)
+            {
+                IntermediateBulkContainer intermediateBulkContainer = new IntermediateBulkContainer()
+                {
+                    Name = name,
+                    Price = price,
+                    InternalVolume = internalVolume,
+
+                    IsFlexible = isFlexibleRadioButton.IsChecked.Value,
+                    IsRigid = isRigidRadioButton.IsChecked.Value,
+                    IsVentilated = isVentilatedRadioButton.IsChecked.Value,
+
+                    ExternalDimensions = new ExternalDimensions()
+                    {
+                        Length = length,
+                        Width = width,
+                        Height = height
+                    }
+                    
+                };
+                await containerService.AddAsync(intermediateBulkContainer);
+            }
+
+            if (ListComboBox.SelectedIndex == 1)
+            {
+                RefrigeratedContainer refrigeratedContainer = new RefrigeratedContainer()
+                {
+                    Name = name,
+                    Price = price,
+                    InternalVolume = internalVolume,
+
+                    MaxTemperature = Convert.ToInt32(maxTemperatureTextBox.Text),
+                    MinTemperature = Convert.ToInt32(minTemperatureTextBox.Text),
+
+                    ExternalDimensions = new ExternalDimensions()
+                    {
+                        Length = length,
+                        Width = width,
+                        Height = height
+                    }
+                };
+                await containerService.AddAsync(refrigeratedContainer);
+            }
+
+            if (ListComboBox.SelectedIndex == 2)
+            {
+                FreightContainer freightContainer = new FreightContainer()
+                {
+                    Name = name,
+                    Price = price,
+                    InternalVolume = internalVolume,
+
+                    IsHardTop = isHardTopRadioButton.IsChecked.Value,
+                    IsSoftTop = isSoftTopRadioButton.IsChecked.Value,
+                    IsOpenSide = isOpenSideRadioButton.IsChecked.Value,
+                    IsOpenTop = isOpenSideRadioButton.IsChecked.Value,
+
+                    ExternalDimensions = new ExternalDimensions()
+                    {
+                        Length = length,
+                        Width = width,
+                        Height = height
+                    }
+                };
+                await containerService.AddAsync(freightContainer);
+            }
+        }
+        catch
+        {
+            MessageBox.Show("No corect data");
+        }
+
     }
 
     private async void updateContainer_Click(object sender, RoutedEventArgs e)
     {
 
-    }
-
-    private async void getContracts_Click(object sender, RoutedEventArgs e)
-    {
-        // GetAll
-        //var contracts = await contractService.GetAllAsync();
-
-        // Post
-        //var contract = new Contract { Credential = "asdf" };
-        //contract = await contractService.AddAsync(contract);
-
-        // Put
-        //contract.Credential += "FromPut";
-        //await contractService.UpdateAsync(contract);
-
-        // Get
-        //contract = await contractService.GetAsync(contract.Id);
-        //containers.Text = $"[{contracts.Length} + {contract!.Id}] => {contract.Credential}";
-
-        // Delete
-        //await contractService.DeleteAsync(contract.Id);
     }
 
 

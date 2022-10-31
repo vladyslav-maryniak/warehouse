@@ -55,7 +55,7 @@
                 <TextBox x:Name="internalVolumeCreateTextBox"></TextBox>
 
                 <Button Height="25" Margin="5" FontWeight="Bold" Click="addContainer_Click">Add</Button>
-                <Button Height="25" Margin="5" FontWeight="Bold">Delete</Button>
+                <Button Height="25" Margin="5" FontWeight="Bold" Click="test_Click">Delete</Button>
 
             </StackPanel>
         </GroupBox>
