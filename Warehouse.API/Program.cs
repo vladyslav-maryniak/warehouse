@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using Warehouse.Application.Services;
 using Warehouse.Application.Services.Abstractions;
 using Warehouse.Infrastructure;
@@ -20,6 +21,8 @@ namespace Warehouse.API
             builder.Services.AddTransient<IContainerService, ContainerService>();
             builder.Services.AddTransient<IEmployeeService, EmployeeService>();
             builder.Services.AddTransient<IRequestService, RequestService>();
+
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

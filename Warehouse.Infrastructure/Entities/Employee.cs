@@ -8,6 +8,11 @@ namespace Warehouse.Infrastructure.Entities
         public int Id { get; set; }
 
         public ICollection<Request> Requests { get; set; } = new List<Request>();
+
+        public static implicit operator List<object>(Employee v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>

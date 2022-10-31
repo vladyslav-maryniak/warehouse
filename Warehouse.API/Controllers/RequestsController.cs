@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Warehouse.API.DTOs.Requests;
 using Warehouse.Application.Services;
 using Warehouse.Infrastructure.Entities;
 
@@ -9,10 +11,12 @@ namespace Warehouse.API.Controllers
     public class RequestsController : ControllerBase
     {
         private readonly IRequestService requestService;
+        private readonly IMapper mapper;
 
-        public RequestsController(IRequestService requestService)
+        public RequestsController(IRequestService requestService, IMapper mapper)
         {
             this.requestService = requestService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -30,15 +34,17 @@ namespace Warehouse.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Request>> AddAsync(Request request)
+        public async Task<ActionResult<Request>> AddAsync(AddRequestCommand command)
         {
+            var request = mapper.Map<Request>(command);
             var result = await requestService.AddAsync(request);
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateAsync(Request request)
+        public async Task<ActionResult> UpdateAsync(UpdateRequestCommand command)
         {
+            var request = mapper.Map<Request>(command);
             await requestService.UpdateAsync(request);
             return Ok();
         }
@@ -49,7 +55,5 @@ namespace Warehouse.API.Controllers
             await requestService.DeleteAsync(id);
             return NoContent();
         }
-
-
     }
 }
