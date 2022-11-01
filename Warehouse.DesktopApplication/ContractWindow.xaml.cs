@@ -36,19 +36,27 @@ public partial class ContractWindow : Window
 
     private async void addNewContracts_Click(object sender, RoutedEventArgs e)
     {
-        //Need to add a selection of containers
-        var contract = new Contract { };
-        contract.StartDate = Convert.ToDateTime(startDateCreateTextBox.Text);
-        contract.ExpiryDate = Convert.ToDateTime(expiryDateCreateTextBox.Text);
-        contract.Credential = RandomString(10);
-        await contractService.AddAsync(contract);
-        getAllContract();
+        try
+        {
+            var contract = new Contract { };
+            contract.StartDate = Convert.ToDateTime(startDateCreateTextBox.Text);
+            contract.ExpiryDate = Convert.ToDateTime(expiryDateCreateTextBox.Text);
+            contract.Credential = RandomString(10);
+            await contractService.AddAsync(contract);
+            getAllContract();
+        }
+        catch
+        {
+            MessageBox.Show("ERROR. Incorrect data");
+        }
+
     }
 
     private async void findContracts_Click(object sender, RoutedEventArgs e)
     {
         var contract = new Contract { };
-        contract = await contractService.GetAsync(Convert.ToInt32(contractIdTextBox.Text));
+        int id = Convert.ToInt32(contractIdTextBox.Text);
+        contract = await contractService.GetAsync(id);
         List<Contract> lst = new List<Contract>();
         lst.Add(contract);
         contractGrid.ItemsSource = lst;
@@ -56,16 +64,23 @@ public partial class ContractWindow : Window
 
     private async void updateContracts_Click(object sender, RoutedEventArgs e)
     {
-        if (contractGrid.SelectedIndex != -1)
+        try
         {
-            Contract contract = (Contract)contractGrid.SelectedItem;
-            contract.ExpiryDate = Convert.ToDateTime(expyryTimeTexBox.Text);
-            await contractService.UpdateAsync(contract);
-            getAllContract();
+            if (contractGrid.SelectedIndex != -1)
+            {
+                Contract contract = (Contract)contractGrid.SelectedItem;
+                contract.ExpiryDate = Convert.ToDateTime(expyryTimeTexBox.Text);
+                await contractService.UpdateAsync(contract);
+                getAllContract();
+            }
+            else
+            {
+                MessageBox.Show("ERROR. Not correct data.");
+            }
         }
-        else
+        catch
         {
-            MessageBox.Show("ERROR. Not correct data.");
+            MessageBox.Show("ERROR. Incorrect data");
         }
     }
 

@@ -18,11 +18,12 @@ namespace Warehouse.DesktopApplication
         public static void Configure(HostBuilderContext context, IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
-
             services.AddSingleton<ContractWindow>();
             services.AddSingleton<EmployeeWindow>();
             services.AddSingleton<RequestWindow>();
-
+            services.AddSingleton<ContainerWindow>();
+            services.AddSingleton<UpdateRequestWindow>();
+            services.AddSingleton<UpdateContractWindow>();
 
             services.AddRefitClient<IContainerService>()
                 .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
@@ -30,14 +31,15 @@ namespace Warehouse.DesktopApplication
                 .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
             services.AddRefitClient<IEmployeeService>()
                 .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
+            services.AddRefitClient<IContractService>()
+                .ConfigureHttpClient(httpClient => httpClient.BaseAddress = warehouseApiUri);
         }
 
         protected override async void OnStartup(StartupEventArgs e)
         {
             await appHost.StartAsync();
 
-
-            var startupForm = appHost.Services.GetRequiredService<ContractWindow>();
+            var startupForm = appHost.Services.GetRequiredService<MainWindow>();
 
             startupForm.Show();
 

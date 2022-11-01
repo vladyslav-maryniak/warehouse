@@ -45,13 +45,20 @@ public partial class RequestWindow : Window
 
     private async void addRequest_Click(object sender, RoutedEventArgs e)
     {
-        var request = new Request { };
-        request.TargetDate = Convert.ToDateTime(expyryTimeTexBox.Text);
-        request.EmployeeId = Convert.ToInt32(employeeIdTexBox.Text);
-        request.ContractId = Convert.ToInt32(contractIdTexBox.Text);
+        try
+        {
+            var request = new Request { };
+            request.TargetDate = Convert.ToDateTime(expyryTimeTexBox.Text);
+            request.EmployeeId = Convert.ToInt32(employeeIdTexBox.Text);
+            request.ContractId = Convert.ToInt32(contractIdTexBox.Text);
 
-        await requestService.AddAsync(request);
-        getAllRequest();
+            await requestService.AddAsync(request);
+            getAllRequest();
+        }
+        catch
+        {
+            MessageBox.Show("ERROR. Incorrect data");
+        }
     }
 
     private async void updateRequest_Click(object sender, RoutedEventArgs e)

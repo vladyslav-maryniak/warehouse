@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
 using Warehouse.DesktopApplication.Services;
 using Warehouse.Infrastructure.Entities;
 
