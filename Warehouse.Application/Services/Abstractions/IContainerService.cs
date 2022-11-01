@@ -9,5 +9,6 @@ namespace Warehouse.Application.Services.Abstractions
         Task<Container[]> GetAllAsync();
         Task<Container?> GetAsync(int id);
         Task UpdateAsync(Container container);
+        Task<Container[]> GetAllBycontractIdAsync(int contractId);
     }
 }

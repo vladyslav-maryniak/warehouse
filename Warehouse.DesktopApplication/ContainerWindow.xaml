@@ -95,14 +95,10 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="Hight" Binding="{Binding Hight}"/>
-                <DataGridTextColumn Header="Width" Binding="{Binding Width}"/>
-                <DataGridTextColumn Header="Lenght" Binding="{Binding Lenght}"/>
                 <DataGridTextColumn Header="InternalVolume" Binding="{Binding InternalVolume}"/>
+                <DataGridTextColumn Header="Contract id" Binding="{Binding ContractId}"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        
 
     </Grid>
 </Window>

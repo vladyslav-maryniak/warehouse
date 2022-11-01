@@ -9,6 +9,9 @@ namespace Warehouse.DesktopApplication.Services
         [Get("/api/containers")]
         Task<Container[]> GetAllAsync();
 
+        [Get("/api/containers/{containerId}")]
+        Task<Container[]> GetAllBycontractIdAsync(int containerId);
+
         [Get("/api/containers/{id}")]
         Task<Container?> GetAsync(int id);
 

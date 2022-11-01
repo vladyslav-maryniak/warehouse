@@ -13,12 +13,14 @@ namespace Warehouse.DesktopApplication;
 public partial class ContractWindow : Window
 {
     private readonly IContractService contractService;
+    private readonly IContainerService containerService;
     private static Random random = new Random();
 
-    public ContractWindow(IContractService contractService)
+    public ContractWindow(IContractService contractService, IContainerService containerService)
     {
         InitializeComponent();
         this.contractService = contractService;
+        this.containerService = containerService;
         getAllContract();
     }
 
@@ -54,12 +56,19 @@ public partial class ContractWindow : Window
 
     private async void findContracts_Click(object sender, RoutedEventArgs e)
     {
-        var contract = new Contract { };
-        int id = Convert.ToInt32(contractIdTextBox.Text);
-        contract = await contractService.GetAsync(id);
-        List<Contract> lst = new List<Contract>();
-        lst.Add(contract);
-        contractGrid.ItemsSource = lst;
+        try
+        {
+            var contract = new Contract { };
+            int id = Convert.ToInt32(contractIdTextBox.Text);
+            contract = await contractService.GetAsync(id);
+            List<Contract> lst = new List<Contract>();
+            lst.Add(contract);
+            contractGrid.ItemsSource = lst;
+        }
+        catch
+        {
+            MessageBox.Show("Incorect data");
+        }
     }
 
     private async void updateContracts_Click(object sender, RoutedEventArgs e)
@@ -105,4 +114,15 @@ public partial class ContractWindow : Window
         return new string(Enumerable.Repeat(chars, length)
             .Select(s => s[random.Next(s.Length)]).ToArray());
     }
+
+    private void addContainersToContracts_Click(object sender, RoutedEventArgs e)
+    {
+        if (contractGrid.SelectedIndex != -1)
+        {
+            Contract contract = (Contract)contractGrid.SelectedItem;
+            AddContainersToContractsWindow addContainersToContractsWindow = new AddContainersToContractsWindow(containerService, contract);
+            addContainersToContractsWindow.Show();
+        }
+    }
+    
 }

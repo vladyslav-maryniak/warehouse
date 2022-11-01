@@ -33,13 +33,20 @@ public partial class RequestWindow : Window
 
     private async void findRequest_Click(object sender, RoutedEventArgs e)
     {
-        if (!string.IsNullOrWhiteSpace(requestIdTextBox.Text))
+        try
         {
-            var request = new Request { };
-            request = await requestService.GetAsync(Convert.ToInt32(requestIdTextBox.Text));
-            List<Request> lst = new List<Request>();
-            lst.Add(request);
-            requestGrid.ItemsSource = lst;
+            if (!string.IsNullOrWhiteSpace(requestIdTextBox.Text))
+            {
+                var request = new Request { };
+                request = await requestService.GetAsync(Convert.ToInt32(requestIdTextBox.Text));
+                List<Request> lst = new List<Request>();
+                lst.Add(request);
+                requestGrid.ItemsSource = lst;
+            }
+        }
+        catch
+        {
+            MessageBox.Show("Incorect data");
         }
     }
 

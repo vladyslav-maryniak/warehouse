@@ -16,21 +16,28 @@ namespace Warehouse.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Contract[]>> GetAllAsync()
+        public async Task<ActionResult<Container[]>> GetAllAsync()
         {
             var result = await containerService.GetAllAsync();
             return Ok(result);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Contract?>> GetAsync(int id)
+        public async Task<ActionResult<Container?>> GetAsync(int id)
         {
             var result = await containerService.GetAsync(id);
             return Ok(result);
         }
 
+        [HttpGet("[action] {contractId:int}")]
+        public async Task<ActionResult<Container[]>> GetAllBycontractIdAsync(int contractId)
+        {
+            var result = await containerService.GetAllBycontractIdAsync(contractId);
+            return Ok(result);
+        }
+
         [HttpPost]
-        public async Task<ActionResult<Contract>> AddAsync(Container container)
+        public async Task<ActionResult<Container>> AddAsync(Container container)
         {
             var result = await containerService.AddAsync(container);
             return Ok(result);

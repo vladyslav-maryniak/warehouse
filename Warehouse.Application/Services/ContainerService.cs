@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 using Warehouse.Application.Services.Abstractions;
 using Warehouse.Infrastructure;
 using Warehouse.Infrastructure.Entities;
@@ -23,6 +24,11 @@ namespace Warehouse.Application.Services
             => context.Containers
                 .AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+        public Task<Container[]> GetAllBycontractIdAsync(int contractId)
+            => context.Containers
+                .Where(x => x.ContractId == contractId)
+                .ToArrayAsync();
 
         public async Task<Container> AddAsync(Container container)
         {

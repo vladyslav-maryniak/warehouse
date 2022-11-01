@@ -20,20 +20,21 @@
 
         <GroupBox Padding="3" Margin="5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" Background= "DarkGray">
             <StackPanel>
-                <Button Height="25" Margin="5 20 5 5" Click="getAllContracts_Click" FontWeight="Bold">Update list</Button>
-                <TextBlock HorizontalAlignment="Center" Margin="5 20 5 5">Enter contract id</TextBlock>
+                <Button Height="25" Margin="5 15 5 5" Click="getAllContracts_Click" FontWeight="Bold">Update list</Button>
+                <TextBlock HorizontalAlignment="Center" Margin="5 15 5 5">Enter contract id</TextBlock>
                 <TextBox x:Name="contractIdTextBox" PreviewTextInput="PreviewTextInputNumbers"></TextBox>
                 
                 <Button Height="25" Margin="5" Click="findContracts_Click" FontWeight="Bold">Find contract</Button>
-                <TextBlock HorizontalAlignment="Center" Margin="5 20 5 5">Enter new expiry date</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Margin="5 15 5 5">Enter new expiry date</TextBlock>
                 <TextBox x:Name="expyryTimeTexBox">01.01.2222 01:01:01</TextBox>
                 <Button Height="25" Margin="5" Click="updateContracts_Click" FontWeight="Bold">Update</Button>
 
-                <TextBlock HorizontalAlignment="Center" Margin="5 20 5 5">Enter start date</TextBlock>
+                <TextBlock HorizontalAlignment="Center" Margin="5 15 5 5">Enter start date</TextBlock>
                 <TextBox x:Name="startDateCreateTextBox" PreviewTextInput="PreviewTextInputNumbers">01.01.2222 01:01:01</TextBox>
                 <TextBlock HorizontalAlignment="Center" Margin="5">Enter expiry date</TextBlock>
                 <TextBox x:Name="expiryDateCreateTextBox" PreviewTextInput="PreviewTextInputNumbers">01.01.2222 01:01:01</TextBox>
                 <Button Height="25" Margin="5" Click="addNewContracts_Click" FontWeight="Bold">Create new contract</Button>
+                <Button Height="25" Margin="5" Click="addContainersToContracts_Click" FontWeight="Bold">Add containers</Button>
             </StackPanel>
         </GroupBox>
 

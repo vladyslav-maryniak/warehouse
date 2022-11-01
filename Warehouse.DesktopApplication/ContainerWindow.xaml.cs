@@ -19,7 +19,7 @@ public partial class ContainerWindow : Window
     {
         InitializeComponent();
         this.containerService = containerService;
-        //getAllContainer();
+        getAllContainer();
     }
     private async void getAllContainer()
     {
@@ -34,13 +34,20 @@ public partial class ContainerWindow : Window
 
     private async void findContainer_Click(object sender, RoutedEventArgs e)
     {
-        if (!string.IsNullOrWhiteSpace(contractIdTextBox.Text))
+        try
         {
-            var container = new Container { };
-            container = await containerService.GetAsync(Convert.ToInt32(contractIdTextBox.Text));
-            List<Container> lst = new List<Container>();
-            lst.Add(container);
-            containerGrid.ItemsSource = lst;
+            if (!string.IsNullOrWhiteSpace(contractIdTextBox.Text))
+            {
+                var container = new Container { };
+                container = await containerService.GetAsync(Convert.ToInt32(contractIdTextBox.Text));
+                List<Container> lst = new List<Container>();
+                lst.Add(container);
+                containerGrid.ItemsSource = lst;
+            }
+        }
+        catch
+        {
+            MessageBox.Show("Incorect data");
         }
     }
 

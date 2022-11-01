@@ -95,7 +95,7 @@ public partial class MainWindow : Window
 
     private void openContractWindow_Click(object sender, RoutedEventArgs e)
     {
-        ContractWindow contractWindow = new ContractWindow(contractService);
+        ContractWindow contractWindow = new ContractWindow(contractService, containerService);
         contractWindow.Show();
     }
 
